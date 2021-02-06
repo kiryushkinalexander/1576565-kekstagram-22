@@ -62,20 +62,25 @@ const getImageId = () => {
 
 
 const getCommentsArray = () => {
-  return {
-    id: getRandomNumberInRange(0, 25),
-    avatar: getImageId(),
-    message: getRandomArrayElement(MESSAGES, 0, 6),
-    name: getRandomArrayElement(NAMES, 0, 7),
+  const commentsArray = [];
+  for (let i = 0; i < 10; i++) {
+    const commentObject = {
+      id: i + 1,
+      avatar: getImageId(),
+      message: getRandomArrayElement(MESSAGES, 0, 6),
+      name: getRandomArrayElement(NAMES, 0, 7),
+    }
+    commentsArray.push(commentObject)
   }
+  return commentsArray;
 }
 
 const getObjectArray = () => {
   const objectsArray = [];
   for (let i = 0; i < PHOTOS_ARRAY; i++) {
     const newObject = {
-      id: getRandomNumberInRange(0, 25),
-      url: `photos/${getRandomNumberInRange(1, 6)}.jpg`,
+      id: i + 1,
+      url: `photos/${i+1}.jpg`,
       description: getRandomArrayElement(DESCRIPTIONS, 0, 4),
       likes: getRandomNumberInRange(15, 200),
       comment: getCommentsArray(),

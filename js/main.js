@@ -1,7 +1,6 @@
 'use strict'
 
 const PHOTOS_ARRAY = 25;
-const USER_ID = 25;
 
 const NAMES = [
   'Робокоп',
@@ -58,7 +57,7 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomNumberInRange(0, elements.length - 1)]
 }
 
-const getComment = () => {
+const getComments = () => {
   const commentsArray = [];
 
   for (let i = 0; i < 10; i++) {
@@ -73,45 +72,21 @@ const getComment = () => {
   return commentsArray;
 }
 // eslint-disable-next-line no-console
-console.log(getComment())
+console.log(getComments())
 
-const generatePhoto = () => {
-
-  for (let i = 0; i < USER_ID; i++) {
-    const newObject = {
-      id: i + 1,
-      url: `photos/${i + 1}.jpg`,
-      description: getRandomArrayElement(DESCRIPTIONS),
-      likes: getRandomNumberInRange(15, 200),
-      comments: getComment(),
-    }
-
-    return newObject;
+const generatePhoto = (item, id) => {
+  return {
+    id: `${id}`,
+    url: `photos/${id}.jpg`,
+    description: getRandomArrayElement(DESCRIPTIONS),
+    likes: getRandomNumberInRange(15, 200),
+    comments: getComments(),
   }
 }
 
 // eslint-disable-next-line no-console
 console.log(generatePhoto())
 
-const photoData = new Array(PHOTOS_ARRAY).fill(null).map(() => generatePhoto())
+const photoData = new Array(PHOTOS_ARRAY).fill(null).map((item, id) => generatePhoto(item, id + 1))
 // eslint-disable-next-line no-console
 console.log(photoData)
-
-
-
-
-// const generateObject = () => {
-//   const objectsArray = [];
-
-//   for (let i = 0; i < PHOTOS_ARRAY; i++) {
-//     const newObject = {
-
-//     }
-//     objectsArray.push(newObject)
-//   }
-
-//   return objectsArray;
-// }
-
-// eslint-disable-next-line no-console
-// console.log(generateObject());

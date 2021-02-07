@@ -1,28 +1,7 @@
-const getRandomNumberInRange = (min, max) => {
-  if (min < 0 || max < 0 || max === min) {
-    // eslint-disable-next-line no-console
-    console.log('Укажите числа больше 0');
-    return;
-  }
-
-  if (min > max) {
-    [min, max] = [max, min];
-  }
-
-  min = Math.ceil(min);
-  max = Math.floor(max);
-
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const validateStringLength = (validateString, maxLength) => {
-  return validateString.length <= maxLength;
-}
-
-// validateStringLength();
-
+'use strict'
 
 const PHOTOS_ARRAY = 25;
+const USER_ID = 25;
 
 const NAMES = [
   'Робокоп',
@@ -52,43 +31,87 @@ const DESCRIPTIONS = [
 ];
 
 
-const getRandomArrayElement = (elements, min, max) => {
-  return elements[getRandomNumberInRange(min, max - 1)]
-}
 
-const getImageId = () => {
-  return `img/avatar-${getRandomNumberInRange(1, 6)}.svg`
-}
-
-
-const getCommentsArray = () => {
-  const commentsArray = [];
-  for (let i = 0; i < 10; i++) {
-    const commentObject = {
-      id: i + 1,
-      avatar: getImageId(),
-      message: getRandomArrayElement(MESSAGES, 0, 6),
-      name: getRandomArrayElement(NAMES, 0, 7),
-    }
-    commentsArray.push(commentObject)
+const getRandomNumberInRange = (min, max) => {
+  if (min < 0 || max < 0 || max === min) {
+    // eslint-disable-next-line no-console
+    console.log('Укажите числа больше 0');
+    return;
   }
+
+  if (min > max) {
+    [min, max] = [max, min];
+  }
+
+  min = Math.ceil(min);
+  max = Math.floor(max);
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+// eslint-disable-next-line no-unused-vars
+const validateStringLength = (validateString, maxLength) => {
+  return validateString.length <= maxLength;
+}
+
+const getRandomArrayElement = (elements) => {
+  return elements[getRandomNumberInRange(0, elements.length - 1)]
+}
+
+const getComment = () => {
+  const commentsArray = [];
+
+  for (let i = 0; i < 10; i++) {
+    commentsArray.push({
+      id: i + 1,
+      avatar: `img/avatar-${getRandomNumberInRange(1, 6)}.svg`,
+      message: getRandomArrayElement(MESSAGES),
+      name: getRandomArrayElement(NAMES),
+    })
+  }
+
   return commentsArray;
 }
+// eslint-disable-next-line no-console
+console.log(getComment())
 
-const getObjectArray = () => {
-  const objectsArray = [];
-  for (let i = 0; i < PHOTOS_ARRAY; i++) {
+const generatePhoto = () => {
+
+  for (let i = 0; i < USER_ID; i++) {
     const newObject = {
       id: i + 1,
-      url: `photos/${i+1}.jpg`,
-      description: getRandomArrayElement(DESCRIPTIONS, 0, 4),
+      url: `photos/${i + 1}.jpg`,
+      description: getRandomArrayElement(DESCRIPTIONS),
       likes: getRandomNumberInRange(15, 200),
-      comment: getCommentsArray(),
+      comments: getComment(),
     }
-    objectsArray.push(newObject)
+
+    return newObject;
   }
-  return objectsArray;
 }
 
 // eslint-disable-next-line no-console
-console.log(getObjectArray());
+console.log(generatePhoto())
+
+const photoData = new Array(PHOTOS_ARRAY).fill(null).map(() => generatePhoto())
+// eslint-disable-next-line no-console
+console.log(photoData)
+
+
+
+
+// const generateObject = () => {
+//   const objectsArray = [];
+
+//   for (let i = 0; i < PHOTOS_ARRAY; i++) {
+//     const newObject = {
+
+//     }
+//     objectsArray.push(newObject)
+//   }
+
+//   return objectsArray;
+// }
+
+// eslint-disable-next-line no-console
+// console.log(generateObject());

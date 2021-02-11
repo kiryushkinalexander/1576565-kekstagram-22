@@ -24,8 +24,4 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomNumberInRange(0, elements.length - 1)]
 };
 
-export {
-  getRandomNumberInRange,
-  validateStringLength,
-  getRandomArrayElement
-};
+export {getRandomNumberInRange, validateStringLength, getRandomArrayElement};

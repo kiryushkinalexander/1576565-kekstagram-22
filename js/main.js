@@ -1,2 +1,4 @@
 import './utils.js';
-import './data.js';
+import {getData} from './data.js';
+
+getData();

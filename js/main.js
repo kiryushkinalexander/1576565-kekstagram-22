@@ -1,4 +1,8 @@
 import './utils.js';
-import {getData} from './data.js';
+import {generateData} from './data.js';
 
-getData();
+// eslint-disable-next-line no-unused-vars
+const pics = generateData();
+
+
+

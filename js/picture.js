@@ -3,29 +3,38 @@ import {generateData} from './data.js';
 
 
 const pictureListElem = document.querySelector('.pictures');
-const pictureTemplate = document.querySelector('#picture').content;
-const pictureFragment = document.createDocumentFragment();
-const pics = generateData();
+const pictureTemplate = document.querySelector('#picture')
+  .content
+  .querySelector('.picture');
 
-const picturesContent = () => {
+const createMiniPicture = ({id, url, comments, likes}) => {
+  const pictureElem = pictureTemplate.cloneNode(true);
 
-  pics.forEach(({url, likes, comments}) => {
+  pictureElem.dataset.id = id;
+  pictureElem.querySelector('.picture__img').src = url;
+  pictureElem.querySelector('.picture__comments').textContent = comments.length;
+  pictureElem.querySelector('.picture__likes').textContent = likes;
+  pictureElem.addEventListener('click', () => {
+    openModal({id, url, likes, comments});
+  });
 
-    const pictureElem = pictureTemplate.cloneNode(true);
+  return pictureElem;
+}
 
-    pictureElem.querySelector('.picture__img').src = url;
-    pictureElem.querySelector('.picture__comments').textContent = comments.length;
-    pictureElem.querySelector('.picture__likes').textContent = likes;
-    pictureFragment.appendChild(pictureElem);
-    pictureElem.addEventListener('click', openModal({url, likes, comments}));
+const createMiniPictures = (pictures) => {
+  const pictureFragment = document.createDocumentFragment();
 
-    return pictureElem;
+  pictures.forEach((item) => {
+    pictureFragment.appendChild(createMiniPicture(item));
 
   });
+
+  return pictureFragment
 };
 
-picturesContent();
+const pics = generateData();
+const miniPictures = createMiniPictures(pics);
 
-pictureListElem.appendChild(pictureFragment);
+pictureListElem.appendChild(miniPictures);
 
 

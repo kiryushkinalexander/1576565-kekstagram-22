@@ -7,13 +7,13 @@ const socialComments = bigPicture.querySelector('.social__comments');
 const socialCaption = bigPicture.querySelector('.social__caption');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
-const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel')
+const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 
-const createComments = (elem) => {
-  const commentTemplateElement = document.querySelector('.social__comment');
-  const commentElement = commentTemplateElement.cloneNode(true);
+const createComment = (elem) => {
+  const commentElement = socialComments.querySelector('.social__comment').cloneNode(true);
   const commentPicture = commentElement.querySelector('.social__picture');
   const commentText = commentElement.querySelector('.social__text');
+
   commentPicture.src = elem.avatar;
   commentPicture.alt = elem.name;
   commentText.textContent = elem.message;
@@ -21,32 +21,38 @@ const createComments = (elem) => {
   return commentElement;
 };
 
-const createBigPicture = (elem) => {
-  bigPictureImg.src = elem.url;
-  likesCount.textContent = elem.likes;
-  commentsCount.textContent = elem.comments.length;
-  for (let i=0; i < elem.comments.length; i++) {
-    socialComments.appendChild(createComments(elem.comments[i]));
-  }
-  socialCaption.textContent = elem.description;
+const createComments = (commentsData) => {
+  const socialComment = document.createDocumentFragment();
+
+  commentsData.forEach((item) => {
+    socialComment.appendChild(createComment(item));
+  });
+
+  socialComments.appendChild(socialComment);
+};
+
+const createBigPicture = (element) => {
+  bigPictureImg.src = element.url;
+  likesCount.textContent = element.likes;
+  commentsCount.textContent = element.comments.size;
+  socialCaption.textContent = element.description;
+  createComments(element.comments);
 }
 
-const openModal = (elem) => {
+const openModal = (element) => {
   socialCommentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-  createBigPicture(elem);
   body.classList.add('modal-open');
-  bigPicture.classList.remove('hidden')
+  bigPicture.classList.remove('hidden');
+  createBigPicture(element);
 }
 
 const closeModal = () => {
   body.classList.remove('modal-open');
-  bigPicture.classList.add('hidden')
-  bigPictureCancel.removeEventListener('click', closeModal)
+  bigPicture.classList.add('hidden');
 }
 
-bigPictureCancel.addEventListener('click', closeModal)
-
+bigPictureCancel.addEventListener('click', closeModal);
 
 export {openModal};
 

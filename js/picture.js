@@ -1,5 +1,6 @@
-import {openModal} from './big-picture.js';
+// import {openModal} from './big-picture.js';
 import {generateData} from './data.js';
+import {openModal} from './big-picture.js';
 
 
 const pictureListElem = document.querySelector('.pictures');
@@ -14,9 +15,6 @@ const createMiniPicture = ({id, url, comments, likes}) => {
   pictureElem.querySelector('.picture__img').src = url;
   pictureElem.querySelector('.picture__comments').textContent = comments.length;
   pictureElem.querySelector('.picture__likes').textContent = likes;
-  pictureElem.addEventListener('click', () => {
-    openModal({id, url, likes, comments});
-  });
 
   return pictureElem;
 }
@@ -36,5 +34,22 @@ const pics = generateData();
 const miniPictures = createMiniPictures(pics);
 
 pictureListElem.appendChild(miniPictures);
+
+pictureListElem.addEventListener('click', (evt) => {
+
+  evt.preventDefault()
+  const pic = evt.target.closest('a.picture')
+  const picId = pic.dataset.id
+  const picture = pics.find(item => item.id === picId)
+
+  if (pic) {
+    openModal(picture)
+  }
+
+})
+
+
+
+
 
 

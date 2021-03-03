@@ -1,3 +1,5 @@
+import {isEscEvent} from './utils.js';
+
 const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
@@ -46,14 +48,25 @@ const openModal = (element) => {
   bigPicture.classList.remove('hidden');
   commentsLoader.classList.add('hidden');
   createBigPicture(element);
+  document.addEventListener('keydown', onEscDown)
+}
+
+const onEscDown = (evt) => {
+  if(isEscEvent(evt)) {
+    closeModal();
+  }
 }
 
 const closeModal = () => {
   body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
+  document.removeEventListener('keydown', onEscDown)
 }
 
-bigPictureCancel.addEventListener('click', closeModal);
+bigPictureCancel.addEventListener('click', () => {
+  document.removeEventListener('keydown', onEscDown);
+  closeModal();
+});
 
 
 export {openModal};

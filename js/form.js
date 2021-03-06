@@ -1,33 +1,34 @@
 import {isEscEvent} from './utils.js';
 import {resetSlider} from './slider.js';
 
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+const SCALE_STEP = 25;
+const DEFAULT_SCALE = 100;
+
 const imageUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
 const imgOverlay = imageUploadForm.querySelector('.img-upload__overlay');
 const uploadCancel = document.querySelector('#upload-cancel');
 const imageUploadPreview = imageUploadForm.querySelector('.img-upload__preview');
-let scaleControlValue = imageUploadForm.querySelector('.scale__control--value');
-const imgUploadScale = document.querySelector('.img-upload__scale');
-const MIN_SCALE = 25;
-const MAX_SCALE = 100;
-const SCALE_STEP = 25;
-const DEFAULT_SCALE = 100;
-scaleControlValue.value = 100;
-let defaultscale;
-defaultscale = DEFAULT_SCALE;
+const scaleControlValue = imageUploadForm.querySelector('.scale__control--value');
+const scaleControlBigger = document.querySelector('.scale__control--bigger');
+const scaleControlSmaller = document.querySelector('.scale__control--smaller');
+
+scaleControlValue.value = MAX_SCALE;
+
+
+let currentScale = DEFAULT_SCALE;
 
 const openForm = () => {
   imgOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onEscDown )
-  resetSlider()
-
+  document.addEventListener('keydown', onEscDown);
+  resetSlider();
 }
 
-uploadFile.addEventListener('click', openForm)
-
 const onEscDown = (evt) => {
-  if(isEscEvent(evt)) {
+  if (isEscEvent(evt)) {
     closeFrom();
   }
 }
@@ -39,35 +40,26 @@ const closeFrom = () => {
   uploadFile.value = '';
 }
 
-uploadCancel.addEventListener('click', closeFrom)
-
 const onScaleControlSmaller = () => {
-  if (defaultscale > MIN_SCALE && defaultscale <= MAX_SCALE) {
-    defaultscale = defaultscale - SCALE_STEP;
-    scaleControlValue.value = `${defaultscale}%`;
-    imageUploadPreview.style.transform = `scale(${defaultscale/MAX_SCALE})`;
+  if (currentScale > MIN_SCALE && currentScale <= MAX_SCALE) {
+    currentScale = currentScale - SCALE_STEP;
+    scaleControlValue.value = `${currentScale}%`;
+    imageUploadPreview.style.transform = `scale(${currentScale / MAX_SCALE})`;
   }
 }
 
 const onScaleControlBigger = () => {
-  if (defaultscale >= MIN_SCALE && defaultscale < MAX_SCALE) {
-    defaultscale = defaultscale + SCALE_STEP;
-    scaleControlValue.value = `${defaultscale}%`;
-    imageUploadPreview.style.transform = `scale(${defaultscale/MAX_SCALE})`;
+  if (currentScale >= MIN_SCALE && currentScale < MAX_SCALE) {
+    currentScale = currentScale + SCALE_STEP;
+    scaleControlValue.value = `${currentScale}%`;
+    imageUploadPreview.style.transform = `scale(${currentScale / MAX_SCALE})`;
   }
 }
 
-imgUploadScale.addEventListener('click', (evt) => {
-  if (evt.target.closest('.scale__control--bigger')){
-    onScaleControlBigger();
-  }
-  if (evt.target.closest('.scale__control--smaller')){
-    onScaleControlSmaller();
-  }
-  // eslint-disable-next-line no-console
-  console.log(evt.target)
-});
-
+uploadFile.addEventListener('click', openForm);
+uploadCancel.addEventListener('click', closeFrom);
+scaleControlBigger.addEventListener('click', onScaleControlBigger);
+scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
 
 
 

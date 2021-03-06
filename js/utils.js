@@ -28,4 +28,9 @@ const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
 }
 
-export {getRandomNumberInRange, validateStringLength, getRandomArrayElement, isEscEvent};
+export {
+  getRandomNumberInRange,
+  validateStringLength,
+  getRandomArrayElement,
+  isEscEvent
+};

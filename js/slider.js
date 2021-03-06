@@ -29,11 +29,9 @@ const createSlider = (min, max, start, step) => {
   });
 }
 
-
 const destroySlider = () => {
   effectLevel.classList.add('hidden');
   slider.noUiSlider.destroy();
-
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -43,7 +41,7 @@ const resetSlider = () => {
   imgUploadPreview.style.transform = '';
 }
 
-const sliderEffects = (element) => {
+const applyEffects = (element) => {
   slider.noUiSlider.on('update', (values, handle) => {
     switch (element) {
       case 'chrome':
@@ -78,7 +76,7 @@ const sliderEffects = (element) => {
 
 effectList.addEventListener('change', (evt) => {
   if (evt.target.matches('.effects__radio')) {
-    if(slider.noUiSlider) {
+    if (slider.noUiSlider) {
       destroySlider();
     }
 
@@ -103,11 +101,8 @@ effectList.addEventListener('change', (evt) => {
         break;
     }
 
-    imgUploadPreview.classList.forEach((item)=> {
-      imgUploadPreview.classList.remove(item);
-    });
     imgUploadPreview.classList.add(`effects__preview--${evt.target.value}`);
-    sliderEffects(evt.target.value);
+    applyEffects(evt.target.value);
   }
 })
 

@@ -24,4 +24,13 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomNumberInRange(0, elements.length - 1)]
 };
 
-export {getRandomNumberInRange, validateStringLength, getRandomArrayElement};
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+}
+
+export {
+  getRandomNumberInRange,
+  validateStringLength,
+  getRandomArrayElement,
+  isEscEvent
+};

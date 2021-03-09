@@ -4,6 +4,7 @@ import './form.js';
 import './big-picture.js';
 import './picture.js';
 import './slider.js';
+import './validation.js';
 
 
 // eslint-disable-next-line no-unused-vars

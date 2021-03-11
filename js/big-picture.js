@@ -51,11 +51,13 @@ const openModal = (element) => {
   document.addEventListener('keydown', onEscDown)
 }
 
+
 const onEscDown = (evt) => {
-  if(isEscEvent(evt)) {
+  if (isEscEvent(evt)) {
     closeModal();
   }
 }
+
 
 const closeModal = () => {
   body.classList.remove('modal-open');

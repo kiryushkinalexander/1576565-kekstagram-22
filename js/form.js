@@ -14,6 +14,8 @@ const imageUploadPreview = imageUploadForm.querySelector('.img-upload__preview')
 const scaleControlValue = imageUploadForm.querySelector('.scale__control--value');
 const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlSmaller = document.querySelector('.scale__control--smaller');
+const textHastags = document.querySelector('.text__hashtags');
+const textDescription = document.querySelector('.text__description');
 
 scaleControlValue.value = MAX_SCALE;
 
@@ -28,8 +30,10 @@ const openForm = () => {
 }
 
 const onEscDown = (evt) => {
-  if (isEscEvent(evt)) {
-    closeFrom();
+  if(isEscEvent(evt)) {
+    if (evt.target !== textHastags && evt.target !== textDescription){
+      closeFrom();
+    }
   }
 }
 

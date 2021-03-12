@@ -54,11 +54,11 @@ const applyEffects = (element) => {
         break;
       case 'marvin':
         imgUploadPreview.style.filter = 'none';
-        imgUploadPreview.style.filter = `invert(${values[handle]})`;
+        imgUploadPreview.style.filter = `invert(${values[handle]}%)`;
         break;
       case 'phobos':
         imgUploadPreview.style.filter = 'none';
-        imgUploadPreview.style.filter = `blur(${values[handle]})`;
+        imgUploadPreview.style.filter = `blur(${values[handle]}px)`;
         break;
       case 'heat':
         imgUploadPreview.style.filter = 'none';
@@ -66,7 +66,7 @@ const applyEffects = (element) => {
         break;
       case 'none':
         imgUploadPreview.style.filter = 'none';
-        destroySlider()
+        destroySlider();
         break;
     }
 

@@ -6,18 +6,18 @@ import './slider.js';
 import './validation.js';
 import {getData} from './api.js';
 import {generatePhotos} from './picture.js';
-import {showAlert} from './utils.js';
+import {showError} from './messages.js';
+import {closeFrom, setUserFormSubmit} from './form.js';
 
+const onDataSuccess = (data) => {
+  generatePhotos(data)
+};
 
-// eslint-disable-next-line no-unused-vars
-// const pics = generateData();
+const onDataFail = () => {
+  showError();
+};
 
-getData(
-  (photos) => {
-    generatePhotos(photos);
-  },
-  () => {
-    showAlert()
-  },
-);
+setUserFormSubmit(closeFrom);
+
+getData(onDataSuccess, onDataFail)
 

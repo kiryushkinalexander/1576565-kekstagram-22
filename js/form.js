@@ -1,5 +1,7 @@
 import {isEscEvent} from './utils.js';
 import {resetSlider} from './slider.js';
+import {showError, showSuccess} from './messages.js';
+import {sendData} from './api.js';
 
 const MIN_SCALE = 25;
 const MAX_SCALE = 100;
@@ -42,6 +44,8 @@ const closeFrom = () => {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscDown);
   uploadFile.value = '';
+  textHastags.value = '';
+  textDescription.value = '';
 }
 
 const onScaleControlSmaller = () => {
@@ -60,10 +64,24 @@ const onScaleControlBigger = () => {
   }
 }
 
+const setUserFormSubmit = (onSuccess) => {
+  imageUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => showSuccess(onSuccess),
+      () => showError(),
+      new FormData(evt.target),
+    );
+  });
+};
+
 uploadFile.addEventListener('click', openForm);
 uploadCancel.addEventListener('click', closeFrom);
 scaleControlBigger.addEventListener('click', onScaleControlBigger);
 scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
+
+export {setUserFormSubmit, closeFrom};
 
 
 

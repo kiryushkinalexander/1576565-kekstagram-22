@@ -53,12 +53,9 @@ const generatePhotos = (photos) => {
     pictureElem.querySelector('.picture__comments').textContent = item.comments.length;
     pictureElem.querySelector('.picture__likes').textContent = item.likes;
     pictureFragment.appendChild(pictureElem);
-    // eslint-disable-next-line no-console
-    console.log(typeof item.id)
+
     pictureElem.addEventListener('click', () => {
       renderBigPicture(item);
-      // eslint-disable-next-line no-console
-      console.log(item, item.id)
     })
 
   });

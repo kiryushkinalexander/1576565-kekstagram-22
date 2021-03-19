@@ -1,16 +1,20 @@
-import {generatePhotos} from './picture.js';
+const SERVER_URL = 'https://22.javascript.pages.academy/kekstagram/';
+const ERROR_MESSAGE = 'Не удалось отправить форму. Попробуйте еще раз';
 
-const getData = () => {
-  fetch('https://22.javascript.pages.academy/kekstagram/data')
+const getData = (onSuccess, onFail) => {
+  fetch(`${SERVER_URL}data`)
     .then((response) => response.json())
-    .then((photos) => {
-      generatePhotos(photos);
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch(() => {
+      onFail(ERROR_MESSAGE);
     });
-}
+};
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://22.javascript.pages.academy/kekstagram',
+    SERVER_URL,
     {
       method: 'POST',
       body,
@@ -20,12 +24,13 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok){
         onSuccess();
       } else {
-        onFail('Не удалось отправить форму. Попробуйте еще раз');
+        onFail(ERROR_MESSAGE);
       }
     })
     .catch( ()=> {
-      onFail('Не удалось отправить форму. Попробуйте еще раз');
+      onFail(ERROR_MESSAGE);
     });
 };
+
 
 export {getData, sendData }

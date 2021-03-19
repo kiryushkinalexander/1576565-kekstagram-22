@@ -14,8 +14,6 @@ const successSection = document.querySelector('#success')
 const successButton = document.querySelector('#success')
   .content
   .querySelector('.success__button');
-// const successInner = document.querySelector('#success').content.querySelector('.success__inner');
-
 
 const onErrorEsc = (evt) => {
   if (isEscEvent(evt)) {

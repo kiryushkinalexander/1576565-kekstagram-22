@@ -1,6 +1,6 @@
-import {isEscEvent} from './utils.js';
+import {isEscEvent, showAlert} from './utils.js';
 import {resetSlider} from './slider.js';
-import {showError, showSuccess} from './messages.js';
+import {showSuccessModal, showErrorModal} from './messages.js';
 import {sendData} from './api.js';
 
 const MIN_SCALE = 25;
@@ -64,13 +64,23 @@ const onScaleControlBigger = () => {
   }
 }
 
-const setUserFormSubmit = (onSuccess) => {
+const onSendDataSuccess = () => {
+  showSuccessModal();
+  closeFrom();
+}
+const onSendDataError = () => {
+  showErrorModal();
+  closeFrom();
+}
+
+
+const setUserFormSubmit = () => {
   imageUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     sendData(
-      () => showSuccess(onSuccess),
-      () => showError(),
+      onSendDataSuccess,
+      onSendDataError,
       new FormData(evt.target),
     );
   });

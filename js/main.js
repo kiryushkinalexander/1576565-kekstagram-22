@@ -4,20 +4,21 @@ import './big-picture.js';
 import './picture.js';
 import './slider.js';
 import './validation.js';
-import {getData} from './api.js';
+import {getData, GETDATA_ERROR_MESSAGE} from './api.js';
 import {generatePhotos} from './picture.js';
-import {showError} from './messages.js';
-import {closeFrom, setUserFormSubmit} from './form.js';
+// import {showError} from './messages.js';
+import { setUserFormSubmit} from './form.js';
+import {showAlert} from './utils.js';
 
 const onDataSuccess = (data) => {
   generatePhotos(data)
 };
 
 const onDataFail = () => {
-  showError();
+  // eslint-disable-next-line no-undef
+  showAlert(GETDATA_ERROR_MESSAGE);
 };
 
-setUserFormSubmit(closeFrom);
-
+setUserFormSubmit();
 getData(onDataSuccess, onDataFail)
 

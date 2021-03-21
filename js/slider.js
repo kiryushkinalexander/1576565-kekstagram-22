@@ -5,6 +5,7 @@ const effectValue = document.querySelector('.effect-level__value');
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
 const slider = document.querySelector('.effect-level__slider');
 
+
 const createSlider = (min, max, start, step) => {
   effectLevel.classList.remove('hidden');
   noUiSlider.create(slider, {
@@ -27,6 +28,7 @@ const createSlider = (min, max, start, step) => {
       },
     },
   });
+
 }
 
 const destroySlider = () => {
@@ -82,7 +84,7 @@ effectList.addEventListener('change', (evt) => {
 
     switch (evt.target.value) {
       case 'chrome':
-        createSlider(0, 1, 1, 0.01);
+        createSlider(0, 1, 1, 0.1);
         break;
       case 'sepia':
         createSlider(0, 1, 1, 0.01);

@@ -1,63 +1,42 @@
 import {isEscEvent} from './utils.js';
-import {closeFrom} from './form.js';
 
-const errorSection = document.querySelector('#error')
+const main = document.querySelector('main')
+const errorTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
-const errorButton = document.querySelector('#error')
-  .content
-  .querySelector('.error__button');
 
-const successSection = document.querySelector('#success')
+const successTemplate = document.querySelector('#success')
   .content
   .querySelector('.success');
-const successButton = document.querySelector('#success')
-  .content
-  .querySelector('.success__button');
 
-const onErrorEsc = (evt) => {
-  if (isEscEvent(evt)) {
-    evt.preventDefault();
-    closeError();
+const showModal = (modal) => {
+  const closeModal = () => {
+    modal.remove();
+    document.removeEventListener('keydown', onDocumentKeyDown);
   }
-};
 
-const showError = () => {
-  const errorTemplate = document.querySelector('#error').content;
-  document.body.appendChild(errorTemplate);
-  document.addEventListener('keydown', onErrorEsc);
+  const onModalClick = () => closeModal();
+
+  const onDocumentKeyDown = (evt) => {
+    if (isEscEvent(evt)) {
+      closeModal();
+    }
+  }
+
+  main.appendChild(modal);
+  modal.addEventListener('click', onModalClick);
+  document.addEventListener('keydown', onDocumentKeyDown);
 }
 
-const closeError = () => {
-  errorSection.classList.add('hidden');
-  document.removeEventListener('keydown', onErrorEsc)
+const showSuccessModal = () => {
+  const successModal = successTemplate.cloneNode(true);
+  showModal(successModal);
+};
+
+const showErrorModal = () => {
+  const errorModal = errorTemplate.cloneNode(true);
+  showModal(errorModal);
 }
 
-errorButton.addEventListener('click', () => {
-  onErrorEsc();
-})
 
-const onSuccessEsc = (evt) => {
-  if (isEscEvent(evt)) {
-    evt.preventDefault();
-    closeSuccess();
-  }
-};
-
-const showSuccess = () => {
-  const successTemplate = document.querySelector('#success').content;
-  document.body.appendChild(successTemplate);
-  document.addEventListener('keydown', onSuccessEsc);
-  closeFrom();
-};
-
-const closeSuccess = () => {
-  successSection.classList.add('hidden');
-  document.removeEventListener('keydown', onSuccessEsc);
-};
-
-successButton.addEventListener('click', () => {
-  closeSuccess()
-});
-
-export {showError, showSuccess}
+export {showSuccessModal, showErrorModal}

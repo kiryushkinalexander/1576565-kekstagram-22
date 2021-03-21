@@ -1,14 +1,15 @@
-const SERVER_URL = 'https://22.javascript.pages.academy/kekstagram/';
-const ERROR_MESSAGE = 'Не удалось отправить форму. Попробуйте еще раз';
+const SERVER_URL = 'https://22.javascript.pages.academy/kekstagram';
+const SENDDATA_ERROR_MESSAGE = 'Не удалось отправить форму. Попробуйте еще раз';
+const GETDATA_ERROR_MESSAGE = 'Отсутствует связь с сервером. Попробуйте позже';
 
 const getData = (onSuccess, onFail) => {
-  fetch(`${SERVER_URL}data`)
+  fetch(`${SERVER_URL}/data`)
     .then((response) => response.json())
     .then((data) => {
       onSuccess(data);
     })
     .catch(() => {
-      onFail(ERROR_MESSAGE);
+      onFail(GETDATA_ERROR_MESSAGE);
     });
 };
 
@@ -24,13 +25,13 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok){
         onSuccess();
       } else {
-        onFail(ERROR_MESSAGE);
+        onFail(SENDDATA_ERROR_MESSAGE);
       }
     })
     .catch( ()=> {
-      onFail(ERROR_MESSAGE);
+      onFail(SENDDATA_ERROR_MESSAGE);
     });
 };
 
 
-export {getData, sendData }
+export {getData, sendData, GETDATA_ERROR_MESSAGE }

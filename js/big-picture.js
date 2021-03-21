@@ -12,6 +12,7 @@ const commentsLoader = bigPicture.querySelector('.comments-loader');
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 
 
+
 const createComment = (elem) => {
   const commentElement = socialComments.querySelector('.social__comment').cloneNode(true);
   const commentPicture = commentElement.querySelector('.social__picture');
@@ -34,23 +35,31 @@ const createComments = (commentsData) => {
   socialComments.appendChild(socialComment);
 };
 
-
-const createBigPicture = (element) => {
+const renderBigPicture = (element) => {
+  openModal(element);
   bigPictureImg.src = element.url;
   likesCount.textContent = element.likes;
   commentsCount.textContent = element.comments.length;
   socialCaption.textContent = element.description;
   createComments(element.comments);
-}
 
-const openModal = (element) => {
+  // eslint-disable-next-line no-console
+  console.log(element)
+}
+// const createBigPicture = (element) => {
+//   bigPictureImg.src = element.url;
+//   likesCount.textContent = element.likes;
+//   commentsCount.textContent = element.comments.length;
+//   socialCaption.textContent = element.description;
+//   createComments(element.comments);
+// }
+
+const openModal = () => {
   body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
   commentsLoader.classList.add('hidden');
-  createBigPicture(element);
   document.addEventListener('keydown', onEscDown)
 }
-
 
 const onEscDown = (evt) => {
   if (isEscEvent(evt)) {
@@ -71,7 +80,7 @@ bigPictureCancel.addEventListener('click', () => {
 });
 
 
-export {openModal};
+export {openModal, renderBigPicture};
 
 
 

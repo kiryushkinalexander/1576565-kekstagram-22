@@ -46,13 +46,6 @@ const renderBigPicture = (element) => {
   // eslint-disable-next-line no-console
   console.log(element)
 }
-// const createBigPicture = (element) => {
-//   bigPictureImg.src = element.url;
-//   likesCount.textContent = element.likes;
-//   commentsCount.textContent = element.comments.length;
-//   socialCaption.textContent = element.description;
-//   createComments(element.comments);
-// }
 
 const openModal = () => {
   body.classList.add('modal-open');

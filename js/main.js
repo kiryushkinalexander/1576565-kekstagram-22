@@ -9,6 +9,8 @@ import {generatePhotos} from './picture.js';
 // import {showError} from './messages.js';
 import { setUserFormSubmit} from './form.js';
 import {showAlert} from './utils.js';
+import './filters.js'
+
 
 const onDataSuccess = (data) => {
   generatePhotos(data)
@@ -20,5 +22,5 @@ const onDataFail = () => {
 };
 
 setUserFormSubmit();
-getData(onDataSuccess, onDataFail)
+getData(onDataSuccess, onDataFail);
 

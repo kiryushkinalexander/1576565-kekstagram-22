@@ -1,3 +1,4 @@
+
 const SERVER_URL = 'https://22.javascript.pages.academy/kekstagram';
 const SENDDATA_ERROR_MESSAGE = 'Не удалось отправить форму. Попробуйте еще раз';
 const GETDATA_ERROR_MESSAGE = 'Отсутствует связь с сервером. Попробуйте позже';

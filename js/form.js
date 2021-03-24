@@ -20,8 +20,6 @@ const textHastags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
 
 scaleControlValue.value = MAX_SCALE;
-
-
 let currentScale = DEFAULT_SCALE;
 
 const openForm = () => {
@@ -29,7 +27,7 @@ const openForm = () => {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onEscDown);
   resetSlider();
-}
+};
 
 const onEscDown = (evt) => {
   if(isEscEvent(evt)) {
@@ -37,7 +35,7 @@ const onEscDown = (evt) => {
       closeFrom();
     }
   }
-}
+};
 
 const closeFrom = () => {
   imgOverlay.classList.add('hidden');
@@ -46,7 +44,7 @@ const closeFrom = () => {
   uploadFile.value = '';
   textHastags.value = '';
   textDescription.value = '';
-}
+};
 
 const onScaleControlSmaller = () => {
   if (currentScale > MIN_SCALE && currentScale <= MAX_SCALE) {
@@ -54,7 +52,7 @@ const onScaleControlSmaller = () => {
     scaleControlValue.value = `${currentScale}%`;
     imageUploadPreview.style.transform = `scale(${currentScale / MAX_SCALE})`;
   }
-}
+};
 
 const onScaleControlBigger = () => {
   if (currentScale >= MIN_SCALE && currentScale < MAX_SCALE) {
@@ -62,17 +60,17 @@ const onScaleControlBigger = () => {
     scaleControlValue.value = `${currentScale}%`;
     imageUploadPreview.style.transform = `scale(${currentScale / MAX_SCALE})`;
   }
-}
+};
 
 const onSendDataSuccess = () => {
   showSuccessModal();
   closeFrom();
-}
+};
+
 const onSendDataError = () => {
   showErrorModal();
   closeFrom();
-}
-
+};
 
 const setUserFormSubmit = () => {
   imageUploadForm.addEventListener('submit', (evt) => {

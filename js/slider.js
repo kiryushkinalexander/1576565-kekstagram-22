@@ -5,7 +5,6 @@ const effectValue = document.querySelector('.effect-level__value');
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
 const slider = document.querySelector('.effect-level__slider');
 
-
 const createSlider = (min, max, start, step) => {
   effectLevel.classList.remove('hidden');
   noUiSlider.create(slider, {
@@ -28,20 +27,18 @@ const createSlider = (min, max, start, step) => {
       },
     },
   });
-
-}
+};
 
 const destroySlider = () => {
   effectLevel.classList.add('hidden');
   slider.noUiSlider.destroy();
 };
 
-// eslint-disable-next-line no-unused-vars
 const resetSlider = () => {
   effectLevel.classList.add('hidden');
   imgUploadPreview.style.filter = 'none';
   imgUploadPreview.style.transform = '';
-}
+};
 
 const applyEffects = (element) => {
   slider.noUiSlider.on('update', (values, handle) => {
@@ -106,7 +103,7 @@ effectList.addEventListener('change', (evt) => {
     imgUploadPreview.classList.add(`effects__preview--${evt.target.value}`);
     applyEffects(evt.target.value);
   }
-})
+});
 
 export {resetSlider};
 

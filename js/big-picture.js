@@ -7,11 +7,8 @@ const likesCount = bigPicture.querySelector('.likes-count');
 const commentsCount = bigPicture.querySelector('.comments-count');
 const socialComments = bigPicture.querySelector('.social__comments');
 const socialCaption = bigPicture.querySelector('.social__caption');
-
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
-
-
 
 const createComment = (elem) => {
   const commentElement = socialComments.querySelector('.social__comment').cloneNode(true);
@@ -42,36 +39,31 @@ const renderBigPicture = (element) => {
   commentsCount.textContent = element.comments.length;
   socialCaption.textContent = element.description;
   createComments(element.comments);
-
-  // eslint-disable-next-line no-console
-  console.log(element)
-}
+};
 
 const openModal = () => {
   body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
   commentsLoader.classList.add('hidden');
   document.addEventListener('keydown', onEscDown)
-}
+};
 
 const onEscDown = (evt) => {
   if (isEscEvent(evt)) {
     closeModal();
   }
-}
-
+};
 
 const closeModal = () => {
   body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
   document.removeEventListener('keydown', onEscDown)
-}
+};
 
 bigPictureCancel.addEventListener('click', () => {
   document.removeEventListener('keydown', onEscDown);
   closeModal();
 });
-
 
 export {openModal, renderBigPicture};
 

@@ -1,4 +1,3 @@
-// import {generateData} from './data.js';
 import {renderBigPicture} from './big-picture.js';
 
 const pictureListElem = document.querySelector('.pictures');
@@ -10,9 +9,7 @@ const generatePhotos = (photos) => {
   const pictureFragment = document.createDocumentFragment();
 
   photos.forEach((item) => {
-    // pictureFragment.appendChild(createMiniPicture(item));
     const pictureElem = pictureTemplate.cloneNode(true);
-    // pictureElem.dataset.id = item.id;
     pictureElem.querySelector('.picture__img').src = item.url;
     pictureElem.querySelector('.picture__comments').textContent = item.comments.length;
     pictureElem.querySelector('.picture__likes').textContent = item.likes;
@@ -21,10 +18,10 @@ const generatePhotos = (photos) => {
     pictureElem.addEventListener('click', () => {
       renderBigPicture(item);
     })
-
   });
+
   pictureListElem.appendChild(pictureFragment);
-}
+};
 
 export {generatePhotos};
 

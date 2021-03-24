@@ -26,7 +26,7 @@ const showModal = (modal) => {
   main.appendChild(modal);
   modal.addEventListener('click', onModalClick);
   document.addEventListener('keydown', onDocumentKeyDown);
-}
+};
 
 const showSuccessModal = () => {
   const successModal = successTemplate.cloneNode(true);
@@ -36,7 +36,6 @@ const showSuccessModal = () => {
 const showErrorModal = () => {
   const errorModal = errorTemplate.cloneNode(true);
   showModal(errorModal);
-}
+};
 
-
-export {showSuccessModal, showErrorModal}
+export {showSuccessModal, showErrorModal};

@@ -10,18 +10,16 @@ const textHashtagsMap = {
   double: 'Хэштеги должны быть разные',
   regex: 'Хэштег должен начинаться с символа \'#\', не может содержать один символ \'#\', может содержать только буквы и числа ',
   size: 'Хэштегов не должно быть больше пяти',
-  lenght: `Длина одного хэштега не может быть больше ${MAX_HASHTAG_LENGTH} символов`,
+  length: `Длина одного хэштега не может быть больше ${MAX_HASHTAG_LENGTH} символов`,
 }
 
 textHastags.addEventListener('input', () => {
   const hashtags = textHastags.value.toLowerCase().split(' ');
-
   const uniqueHashtags = new Set(hashtags);
 
   hashtags.forEach((hashtag) => {
-
     if (hashtag.length > MAX_HASHTAG_LENGTH) {
-      textHastags.setCustomValidity(textHashtagsMap.lenght);
+      textHastags.setCustomValidity(textHashtagsMap.length);
     } else if (hashtags.length >= MAX_HASHTAG_AMOUNT) {
       textHastags.setCustomValidity(textHashtagsMap.size);
     } else if (hashtags.length !== uniqueHashtags.size) {

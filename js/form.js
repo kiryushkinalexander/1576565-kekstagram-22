@@ -1,4 +1,4 @@
-import {isEscEvent, showAlert} from './utils.js';
+import {isEscEvent} from './utils.js';
 import {resetSlider} from './slider.js';
 import {showSuccessModal, showErrorModal} from './messages.js';
 import {sendData} from './api.js';
@@ -31,7 +31,7 @@ const openForm = () => {
 
 const onEscDown = (evt) => {
   if(isEscEvent(evt)) {
-    if (evt.target !== textHastags && evt.target !== textDescription){
+    if (textHastags !== document.activeElement && textDescription !== document.activeElement){
       closeFrom();
     }
   }

@@ -1,3 +1,4 @@
+/* global _:readonly */
 import {generatePhotos} from './picture.js';
 
 const RERENDER_DELAY = 500;
@@ -18,16 +19,13 @@ const clearPhotos = () => {
 };
 
 const getRandomPhotos = (photos) => {
-  clearPhotos();
-  const randomPhotos = _.shuffle(photos).slice(RANDOM_COUNT_PHOTOS);
-
+  const copyPhotos = photos.slice();
+  const randomPhotos = _.shuffle(copyPhotos).slice(RANDOM_COUNT_PHOTOS);
   generatePhotos(randomPhotos.slice(0, RANDOM_COUNT_PHOTOS));
 };
 
 const sortPhotosByComments = (photos) => {
-  clearPhotos();
-  const sortedPhotos = photos.sort((photoA, photoB) => photoB.comments.length - photoA.comments.length);
-
+  const sortedPhotos = photos.slice().sort((photoA, photoB) => photoB.comments.length - photoA.comments.length);
   generatePhotos(sortedPhotos);
 };
 
@@ -39,15 +37,19 @@ const onFilterFormChange = (evt, photos) => {
   buttons.forEach(button => button.classList.remove('img-filters__button--active'));
   evt.target.classList.add('img-filters__button--active');
 
-  if (evt.target.matches('#filter-default')) {
-    clearPhotos(photos);
-    generatePhotos(photos);
-  }
-  if (evt.target.matches('#filter-random')) {
-    getRandomPhotos(photos)
-  }
-  if (evt.target.matches('#filter-discussed')) {
-    sortPhotosByComments(photos)
+  switch (evt.target.id) {
+    case 'filter-default':
+      clearPhotos(photos);
+      generatePhotos(photos);
+      break;
+    case 'filter-random':
+      clearPhotos();
+      getRandomPhotos(photos)
+      break;
+    case 'filter-discussed':
+      clearPhotos();
+      sortPhotosByComments(photos)
+      break;
   }
 };
 

@@ -14,7 +14,7 @@ const textHashtagsMap = {
 }
 
 textHastags.addEventListener('input', () => {
-  const hashtags = textHastags.value.toLowerCase().split(' ');
+  const hashtags = textHastags.value.toLowerCase().trim().split(' ');
   const uniqueHashtags = new Set(hashtags);
 
   hashtags.forEach((hashtag) => {
@@ -26,6 +26,8 @@ textHastags.addEventListener('input', () => {
       textHastags.setCustomValidity(textHashtagsMap.double);
     } else if (!RE_HASHTAG.test(hashtag)) {
       textHastags.setCustomValidity(textHashtagsMap.regex);
+    } else {
+      textHastags.setCustomValidity('');
     }
 
     textHastags.reportValidity();

@@ -7,18 +7,18 @@ const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 const SCALE_STEP = 25;
 const DEFAULT_SCALE = 100;
+const DEFAULT_IMAGE = 'img/upload-default-image.jpg';
 
 const imageUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
 const imgOverlay = imageUploadForm.querySelector('.img-upload__overlay');
 const uploadCancel = document.querySelector('#upload-cancel');
-const imageUploadPreview = imageUploadForm.querySelector('.img-upload__preview');
-const scaleControlValue = imageUploadForm.querySelector('.scale__control--value');
-const scaleControlBigger = document.querySelector('.scale__control--bigger');
-const scaleControlSmaller = document.querySelector('.scale__control--smaller');
+const imageUploadPreview = imgOverlay.querySelector('.img-upload__preview img');
+const scaleControlValue = imgOverlay.querySelector('.scale__control--value');
+const scaleControlBigger = imgOverlay.querySelector('.scale__control--bigger');
+const scaleControlSmaller = imgOverlay.querySelector('.scale__control--smaller');
 const textHastags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
-
 scaleControlValue.value = MAX_SCALE;
 let currentScale = DEFAULT_SCALE;
 
@@ -27,6 +27,9 @@ const openForm = () => {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onEscDown);
   resetSlider();
+  scaleControlValue.value = '100%';
+  imageUploadPreview.style.transform = 'none';
+  imageUploadPreview.src = DEFAULT_IMAGE;
 };
 
 const onEscDown = (evt) => {

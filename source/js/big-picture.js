@@ -1,5 +1,10 @@
 import {isEscEvent} from './utils.js';
 
+const MAX_COMMENTS_AMOUNT = 5;
+let commentsData = [];
+let currentCommentsLength;
+let shownCommentsCount;
+
 const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
@@ -8,20 +13,10 @@ const commentsCount = bigPicture.querySelector('.comments-count');
 const commentsShown = bigPicture.querySelector('.comments-shown');
 const socialComments = bigPicture.querySelector('.social__comments');
 const socialCaption = bigPicture.querySelector('.social__caption');
-const socialCommentsCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 const commentTemplate = socialComments.querySelector('.social__comment');
 
-const MAX_COMMENTS_AMOUNT = 5;
-let commentsData = [];
-let currentCommentsLength;
-let shownCommentsCount;
-
-const photo = {
-  comments: [],
-  nextComment: 0,
-}
 
 const createComment = ({avatar, name, message}) => {
   const commentElement = commentTemplate.cloneNode(true);

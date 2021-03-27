@@ -1,10 +1,11 @@
-const textHastags = document.querySelector('.text__hashtags');
-const textDescription = document.querySelector('.text__description');
-
 const RE_HASHTAG = /^#[\wа-яa-z]{1,19}$/i;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_AMOUNT = 5;
 const MAX_COMMENT_LENGTH = 140;
+
+const textHastags = document.querySelector('.text__hashtags');
+const textDescription = document.querySelector('.text__description');
+
 
 const textHashtagsMap = {
   double: 'Хэштеги должны быть разные',
@@ -18,7 +19,9 @@ textHastags.addEventListener('input', () => {
   const uniqueHashtags = new Set(hashtags);
 
   hashtags.forEach((hashtag) => {
-    if (hashtag.length > MAX_HASHTAG_LENGTH) {
+    if(!textHastags.value) {
+      textHastags.setCustomValidity('');
+    } else if (hashtag.length > MAX_HASHTAG_LENGTH) {
       textHastags.setCustomValidity(textHashtagsMap.length);
     } else if (hashtags.length >= MAX_HASHTAG_AMOUNT) {
       textHastags.setCustomValidity(textHashtagsMap.size);
@@ -26,6 +29,8 @@ textHastags.addEventListener('input', () => {
       textHastags.setCustomValidity(textHashtagsMap.double);
     } else if (!RE_HASHTAG.test(hashtag)) {
       textHastags.setCustomValidity(textHashtagsMap.regex);
+    } else if(!textHastags.value) {
+      textHastags.setCustomValidity('');
     } else {
       textHastags.setCustomValidity('');
     }

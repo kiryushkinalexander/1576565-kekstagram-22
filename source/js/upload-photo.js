@@ -1,5 +1,7 @@
+import {openForm} from './form.js';
+
 const uploadInput = document.querySelector('.img-upload__input');
-const imgUploadPreview = document.querySelector('.img-upload__preview');
+const imgUploadPreview = document.querySelector('.img-upload__preview img');
 
 const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
@@ -9,15 +11,16 @@ uploadInput.addEventListener('change', () => {
 
   const matches = FILES_TYPES.some((it) => {
     return fileName.endsWith(it);
-  })
+  });
 
   if (matches) {
     const reader = new FileReader();
 
     reader.addEventListener('load', () => {
-      imgUploadPreview.childNodes[1].src = reader.result;
+      openForm();
+      imgUploadPreview.src = reader.result;
     });
 
     reader.readAsDataURL(file);
   }
-})
+});

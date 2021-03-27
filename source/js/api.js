@@ -33,4 +33,8 @@ const sendData = (onSuccess, onFail, body) => {
     });
 };
 
-export {getData, sendData, GET_DATA_ERROR_MESSAGE };
+export {
+  getData,
+  sendData,
+  GET_DATA_ERROR_MESSAGE
+};

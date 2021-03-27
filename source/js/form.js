@@ -7,7 +7,6 @@ const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 const SCALE_STEP = 25;
 const DEFAULT_SCALE = 100;
-const DEFAULT_IMAGE = 'img/upload-default-image.jpg';
 
 const imageUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
@@ -22,31 +21,40 @@ const textDescription = document.querySelector('.text__description');
 scaleControlValue.value = MAX_SCALE;
 let currentScale = DEFAULT_SCALE;
 
+const resetScale = () => {
+  scaleControlValue.value = `${DEFAULT_SCALE}%`;
+  currentScale = DEFAULT_SCALE;
+};
+
+const resetHashtags = () => {
+  textHastags.setCustomValidity('');
+  textDescription.setCustomValidity('')
+  textHastags.value = '';
+  textDescription.value = '';
+};
+
 const openForm = () => {
   imgOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onEscDown);
   resetSlider();
-  scaleControlValue.value = '100%';
-  imageUploadPreview.style.transform = 'none';
-  imageUploadPreview.src = DEFAULT_IMAGE;
+  resetScale();
+  resetHashtags();
 };
 
 const onEscDown = (evt) => {
   if(isEscEvent(evt)) {
     if (textHastags !== document.activeElement && textDescription !== document.activeElement){
-      closeFrom();
+      onFormCloseClick();
     }
   }
 };
 
-const closeFrom = () => {
+const onFormCloseClick = () => {
   imgOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscDown);
   uploadFile.value = '';
-  textHastags.value = '';
-  textDescription.value = '';
 };
 
 const onScaleControlSmaller = () => {
@@ -67,12 +75,12 @@ const onScaleControlBigger = () => {
 
 const onSendDataSuccess = () => {
   showSuccessModal();
-  closeFrom();
+  onFormCloseClick();
 };
 
 const onSendDataError = () => {
   showErrorModal();
-  closeFrom();
+  onFormCloseClick();
 };
 
 const setUserFormSubmit = () => {
@@ -87,12 +95,16 @@ const setUserFormSubmit = () => {
   });
 };
 
-uploadFile.addEventListener('click', openForm);
-uploadCancel.addEventListener('click', closeFrom);
+
+uploadCancel.addEventListener('click', onFormCloseClick);
 scaleControlBigger.addEventListener('click', onScaleControlBigger);
 scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
 
-export {setUserFormSubmit, closeFrom};
+export {
+  setUserFormSubmit,
+  onFormCloseClick,
+  openForm
+};
 
 
 

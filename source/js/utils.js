@@ -2,7 +2,8 @@ const ALERT_SHOW_TIME = 5000;
 
 const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
-}
+};
+
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
@@ -22,9 +23,7 @@ const showAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-}
-
-
+};
 
 export {
   isEscEvent,

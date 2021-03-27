@@ -54,14 +54,15 @@ const onCommentsLoaderClick = () => {
   if (commentsData.length === 0) {
     commentsLoader.classList.add('hidden');
   }
-}
+};
 
 const createComments = (commentsData) => {
   const shownComments = commentsData.splice(0, MAX_COMMENTS_AMOUNT);
   const commentsFragment = createCommentsFragment(shownComments);
 
   socialComments.appendChild(commentsFragment);
-}
+};
+
 const renderBigPicture = ({url, description, comments, likes}) => {
   openModal();
   bigPictureImg.src = url;
@@ -106,7 +107,10 @@ bigPictureCancel.addEventListener('click', () => {
   closeModal();
 });
 
-export {openModal, renderBigPicture};
+export {
+  openModal,
+  renderBigPicture
+};
 
 
 

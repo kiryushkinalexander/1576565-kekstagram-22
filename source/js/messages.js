@@ -4,7 +4,6 @@ const main = document.querySelector('main')
 const errorTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
-
 const successTemplate = document.querySelector('#success')
   .content
   .querySelector('.success');
@@ -13,7 +12,7 @@ const showModal = (modal) => {
   const closeModal = () => {
     modal.remove();
     document.removeEventListener('keydown', onDocumentKeyDown);
-  }
+  };
 
   const onModalClick = () => closeModal();
 
@@ -38,4 +37,7 @@ const showErrorModal = () => {
   showModal(errorModal);
 };
 
-export {showSuccessModal, showErrorModal};
+export {
+  showSuccessModal,
+  showErrorModal
+};

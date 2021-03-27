@@ -57,4 +57,7 @@ const setFilterListener = (data) => {
   imgFiltersFrom.addEventListener('click', _.debounce((evt) => onFilterFormChange(evt, data), RERENDER_DELAY))
 };
 
-export {showFilters, setFilterListener};
+export {
+  showFilters,
+  setFilterListener
+};

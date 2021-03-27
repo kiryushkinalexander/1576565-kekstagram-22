@@ -5,8 +5,6 @@ const MAX_COMMENT_LENGTH = 140;
 
 const textHastags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
-
-
 const textHashtagsMap = {
   double: 'Хэштеги должны быть разные',
   regex: 'Хэштег должен начинаться с символа \'#\', не может содержать один символ \'#\', может содержать только буквы и числа ',
@@ -29,8 +27,6 @@ textHastags.addEventListener('input', () => {
       textHastags.setCustomValidity(textHashtagsMap.double);
     } else if (!RE_HASHTAG.test(hashtag)) {
       textHastags.setCustomValidity(textHashtagsMap.regex);
-    } else if(!textHastags.value) {
-      textHastags.setCustomValidity('');
     } else {
       textHastags.setCustomValidity('');
     }

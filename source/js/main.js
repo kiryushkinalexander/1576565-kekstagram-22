@@ -11,7 +11,6 @@ import { setUserFormSubmit} from './form.js';
 import {showAlert} from './utils.js';
 import  {showFilters, setFilterListener} from './filters.js';
 
-
 const onDataSuccess = (data) => {
   generatePhotos(data)
   showFilters();
